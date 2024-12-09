@@ -14,7 +14,7 @@ const Login = () => {
 
   useEffect(() => {
     if (token) {
-      router.push('/'); 
+      router.push('/notlogin'); 
     }
   }, [token]);
 
