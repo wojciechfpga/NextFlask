@@ -37,7 +37,7 @@ export default function Home() {
     }
   }, [token]);
 
-  const handleLogin = () => dispatch(loginUser(loginForm));
+
   const handleRegister = () => dispatch(registerUser(registerForm));
   const handleLogout = () => dispatch(logout());
   const handleSelectSlot = (slot) => {
