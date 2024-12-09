@@ -27,6 +27,8 @@ export default function Home() {
     if (token) {
       const getEvents = async () => {
         try {
+          console.log(user)
+          console.log(token)
           const data = await fetchEvents(token);
           setEvents(data);
         } catch (err) {
