@@ -5,6 +5,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginUser, registerUser, logout } from '../lib/features/auth/authSlice';
 import CalendarView from '../components/Calendar';
 
+const mapEventData = (data) => {
+  return {
+    id: data.id,
+    title: `Room ${data.room_id}`,
+    start: new Date(data.start_time),
+    end: new Date(data.end_time)
+  };
+};
+
+
+const apiResponse = { id:0,title: "Room", start: "2025-12-01T10:00:00", end: "2025-12-02T12:00:00" };
+
 const fetchEvents = async (token) => {
   const response = await fetch('http://localhost:5000/api/reservations/my', {
     headers: {
@@ -18,11 +30,11 @@ const fetchEvents = async (token) => {
 export default function Home() {
   const dispatch = useDispatch();
   const { user, token, error } = useSelector((state) => state.auth);
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState([apiResponse]);
   const [loading, setLoading] = useState(true);
   const [loginForm, setLoginForm] = useState({ username: '', password: '' });
   const [registerForm, setRegisterForm] = useState({ username: '', password: '' });
-
+  const [en, setEn] = useState(false);
   useEffect(() => {
     if (token) {
       const getEvents = async () => {
@@ -30,7 +42,9 @@ export default function Home() {
           console.log(user)
           console.log(token)
           const data = await fetchEvents(token);
-          setEvents(data);
+          const convertedData=data.map(mapEventData)
+          const spreadEventsData=[...convertedData,...events]
+          setEvents(spreadEventsData);
         } catch (err) {
           console.error(err);
         } finally {
@@ -43,7 +57,14 @@ export default function Home() {
       setLoading(false);
     }
   }, [token]);
-
+  useEffect(() => {
+    if (events) {
+      console.log('Stan en został zaktualizowany:')
+    //  console.log(events)
+    }
+  },
+    [events]
+  )
   const handleLogin = () => {
     dispatch(loginUser(loginForm));
   };
@@ -69,20 +90,23 @@ export default function Home() {
   };
 
   const disableFunctionality = error !== null;
+  console.log("ReRendering page")
+  console.log(events)
+  console.log("Event in page")
 
   return (
     <div className="container mx-auto mt-8">
       <h1 className="text-2xl font-bold mb-4">Conference Room Booking</h1>
+      {events.map((item) => (
+          <li key={item.id}>{item.id}</li>
+        ))}
+      <h1>Calendar</h1>
       {user ? (
         <div>
           <button onClick={handleLogout}>Logout</button>
           {error && <div className="text-red-500 mb-4">Error: {error}</div>}
           <CalendarView
-            events={events.map((e) => ({
-              ...e,
-              start: new Date(e.start),
-              end: new Date(e.end),
-            }))}
+            events={events}
             onEventDrop={disableFunctionality ? null : handleEventDrop}
             onSelectSlot={disableFunctionality ? null : handleSelectSlot}
             onSelectEvent={disableFunctionality ? null : handleSelectEvent}
