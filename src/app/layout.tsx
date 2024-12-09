@@ -20,9 +20,10 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
+  children,auth
 }: Readonly<{
   children: React.ReactNode;
+  auth:any
 }>) {
   return (
     <html lang="en">
@@ -30,6 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReduxProvider>
+          {auth}
         {children}
         </ReduxProvider>
       </body>
