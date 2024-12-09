@@ -2,6 +2,7 @@
 import Link from "next/link"
 import { useEffect } from "react"
 import { useRouter } from 'next/navigation';
+import { useDispatch, useSelector } from "react-redux";
 export default function NoView() {
     const router =useRouter()
     
