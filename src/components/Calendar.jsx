@@ -14,20 +14,22 @@ const CalendarView = ({ events, onEventDrop, onSelectSlot, onSelectEvent }) => {
   const [view, setView] = useState("week");
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow-md">
-      <DnDCalendar
-        localizer={localizer}
-        events={events}
-        view={view} // Użycie 'view' zamiast 'defaultView'
-        selectable
-        resizable
-        onEventDrop={onEventDrop}
-        onSelectSlot={onSelectSlot}
-        onSelectEvent={onSelectEvent}
-        style={{ height: "80vh" }}
-        onView={setView} // Zmiana widoku aktualizuje stan
-      />
-    </div>
+<div className="p-4 bg-white rounded-lg shadow-md border border-gray-200">
+  <DnDCalendar
+    localizer={localizer}
+    events={events}
+    view={view}
+    selectable
+    resizable
+    onEventDrop={onEventDrop}
+    onSelectSlot={onSelectSlot}
+    onSelectEvent={onSelectEvent}
+    style={{ height: "80vh" }}
+    onView={setView}
+    className="rounded-md shadow-inner border border-gray-300"
+  />
+</div>
+
   );
 };
 
