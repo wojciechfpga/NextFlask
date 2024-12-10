@@ -36,7 +36,7 @@ export default function RootLayout({
         <ReduxProvider>
           <ReacQueryProvider>
             <HeaderLayout children={auth}></HeaderLayout>
-            <main className="min-h-[100vh]"> {/* Ustawiamy minimalną wysokość na 80% okna */}
+            <main className="min-h-[100vh]">
               {children}
             </main>
             <Footer />

@@ -61,11 +61,11 @@ export const fetchRooms = async () => {
 };
 
 export const updateEvent = async (token, event) => {
-  const response = await fetch("/api/events/update", {
-    method: "POST",
+  const response = await fetch(`http://localhost:5000/api/reservations/${event.id}`, {
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: `${token}`,
     },
     body: JSON.stringify(event),
   });

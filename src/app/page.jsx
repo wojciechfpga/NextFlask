@@ -15,12 +15,22 @@ export default function Home() {
   const [slotFromCalendar, setSlotFromCalendar] = useState(new Date());
   const [reservationModal, setReservationModal] = useState(false);
 
+  useEffect(()=>{
+    console.log("USE EFFECT")
+    console.log(events)
+    console.log("END USE EFFECT")
+  },[events])
+
   useEffect(() => {
     if (token) {
       const getEvents = async () => {
         try {
           const data = await fetchEvents(token);
           const convertedData = data.map(mapEventData);
+          console.log("DATA")
+          console.log(data)
+          console.log(convertedData)
+          console.log("END")
           setEvents(convertedData);
         } catch (err) {
           console.error(err);
@@ -38,18 +48,30 @@ export default function Home() {
     setReservationModal(true);
     setSlotFromCalendar(slot);
   };
-
+  const updateEvents= (newValue) => {
+    console.log("OLD EVENT")
+    console.log(events)
+    console.log([newValue])
+    setEvents(prevItems =>
+      prevItems.map(item =>
+        item.id === newValue.id ? { ...newValue } : item
+      )
+    );
+  };
   const handleEventDrop = async ({ event, start, end }) => {
     const updatedEvent = {
       id: event.id,
       start_time: start.toISOString(),
       end_time: end.toISOString(),
+      room_id: event.room_id,
     };
 
     try {
       const response = await updateEvent(token, updatedEvent);
-      const updatedData = response.data.map(mapEventData);
-      setEvents(updatedData);
+      console.log(response)
+      const updatedData = mapEventData(response);
+      console.log(updatedData)
+      updateEvents(updatedData)
     } catch (error) {
       console.error("Failed to update event", error);
     }
