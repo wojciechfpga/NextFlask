@@ -52,3 +52,10 @@ export const handleSubmit = async(formData,token) => {
   }).catch(()=>{    
     alert("Some error")   
   })}
+
+
+
+export const fetchRooms = async () => {
+  const { data } = await axios.get('http://localhost:5000/api/rooms');
+  return data;
+};
