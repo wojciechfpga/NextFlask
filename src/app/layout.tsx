@@ -26,6 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
   auth:any
 }>) {
+  console.log(auth)
   return (
     <html lang="en">
       <body

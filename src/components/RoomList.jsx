@@ -9,12 +9,12 @@ const RoomList = () => {
   if (error) return <div>Error loading rooms data</div>;
 
   return (
-    <div>
-      <h1>Available Rooms</h1>
-      <ul>
+    <div className="container mx-auto mt-8 p-4">
+      <ul className="space-y-4">
         {data.map(room => (
-          <li key={room.id}>
-            {room.name} - Capacity: {room.capacity}
+          <li key={room.id} className="p-4 bg-white shadow-md rounded-lg">
+            <h3 className="text-lg font-bold text-gray-800">{room.name}</h3>
+            <p className="text-gray-600">Capacity: {room.capacity}</p>
           </li>
         ))}
       </ul>
