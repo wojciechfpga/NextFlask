@@ -23,22 +23,24 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,auth
+  children, auth
 }: Readonly<{
   children: React.ReactNode;
-  auth:any
+  auth: any;
 }>) {
-  console.log(auth)
+  console.log(auth);
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReduxProvider>
-        <ReacQueryProvider>
-          <HeaderLayout children={auth}></HeaderLayout>
-          {children}
-          <Footer/>
+          <ReacQueryProvider>
+            <HeaderLayout children={auth}></HeaderLayout>
+            <main className="min-h-[100vh]"> {/* Ustawiamy minimalną wysokość na 80% okna */}
+              {children}
+            </main>
+            <Footer />
           </ReacQueryProvider>
         </ReduxProvider>
       </body>
