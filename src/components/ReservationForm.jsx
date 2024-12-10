@@ -15,22 +15,27 @@ const ReservationForm = ({ slot = [] }) => {
   const { register, handleSubmit, reset, setValue } = useForm({
     defaultValues: {
       room_id: "",
-      start_time: formatDateForInput(slot[0]),
-      end_time: formatDateForInput(slot[1]),
+      start_time: formatDateForInput(slot.start),
+      end_time: formatDateForInput(slot.end),
     },
   });
 
   const handleFormSubmit = (data) => {
-    sendReservation(data, token);
+    const convertedData = {
+      ...data,
+      start_time: data.start_time.slice(0, 16), 
+      end_time: data.end_time.slice(0, 16),   
+    };
+  
+    console.log("Converted Data:", convertedData); 
+    sendReservation(convertedData, token);
     reset();
   };
+  
+  
 
   useEffect(() => {
-    console.log("Slot in")
-    console.log(slot)
     if (slot.start && slot.end) {
-      console.log("Slot 0")
-      console.log(formatDateForInput(slot.start))
       setValue("start_time", formatDateForInput(slot.start));
       setValue("end_time", formatDateForInput(slot.end));
     }
