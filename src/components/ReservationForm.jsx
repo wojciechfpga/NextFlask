@@ -1,13 +1,19 @@
 'use client';
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { sendReservation } from "src/services/apiService";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
+// Funkcja do pobrania pokoi
+export const fetchRooms = async () => {
+  const { data } = await axios.get('http://localhost:5000/api/rooms');
+  return data;
+};
 
 const formatDateForInput = (date) => {
   if (!date) return "";
-  return new Date(date).toISOString().slice(0, 16); // Adjust to remove seconds
+  return new Date(date).toISOString().slice(0, 16); // Dostosowanie do formatu bez sekund
 };
 
 const ReservationForm = ({ slot = [] }) => {
@@ -19,6 +25,18 @@ const ReservationForm = ({ slot = [] }) => {
       end_time: formatDateForInput(slot.end),
     },
   });
+
+  // Stan do przechowywania pokoi
+  const [rooms, setRooms] = useState([]);
+
+  // Funkcja do pobrania pokoi i ustawienia ich w stanie
+  useEffect(() => {
+    const loadRooms = async () => {
+      const roomsData = await fetchRooms();
+      setRooms(roomsData);
+    };
+    loadRooms();
+  }, []);
 
   const handleFormSubmit = (data) => {
     const convertedData = {
@@ -32,8 +50,6 @@ const ReservationForm = ({ slot = [] }) => {
     reset();
   };
   
-  
-
   useEffect(() => {
     if (slot.start && slot.end) {
       setValue("start_time", formatDateForInput(slot.start));
@@ -49,11 +65,17 @@ const ReservationForm = ({ slot = [] }) => {
           <label className="block text-gray-700 font-medium mb-2">
             Room ID
           </label>
-          <input
-            type="text"
+          <select
             className="w-full px-4 py-2 border rounded-lg"
             {...register("room_id", { required: true })}
-          />
+          >
+            <option value="">Select a Room</option>
+            {rooms.map((room) => (
+              <option key={room.id} value={room.id}>
+                {room.name}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-2">
