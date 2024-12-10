@@ -39,3 +39,16 @@ export const handleSubmit = async(formData,token) => {
   }).catch(()=>{    
     alert("Some error")   
   })}
+
+  export const sendReservation = async(formData,token) => {
+    await axios.post("http://localhost:5000/api/reservations",formData, {
+    headers: {
+      'Content-Type': 'application/json', 
+      Authorization: token, 
+    },
+  }).then((data)=>{
+    alert("Reservation created")
+
+  }).catch(()=>{    
+    alert("Some error")   
+  })}
