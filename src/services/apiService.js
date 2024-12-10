@@ -59,3 +59,21 @@ export const fetchRooms = async () => {
   const { data } = await axios.get('http://localhost:5000/api/rooms');
   return data;
 };
+
+export const updateEvent = async (token, event) => {
+  const response = await fetch("/api/events/update", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(event),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to update event");
+  }
+
+  return response.json();
+};
+
