@@ -4,6 +4,8 @@ import "./globals.css";
 import HeaderLayout from '../components/Header'
 import ReduxProvider from '../components/Wrap';
 import ReacQueryProvider from '../components/QueryProvide';
+import Footer from '../components/Footer';
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -36,6 +38,7 @@ export default function RootLayout({
         <ReacQueryProvider>
           <HeaderLayout children={auth}></HeaderLayout>
           {children}
+          <Footer/>
           </ReacQueryProvider>
         </ReduxProvider>
       </body>
