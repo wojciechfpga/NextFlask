@@ -5,7 +5,7 @@ import { loginUser, registerUser, logout } from "../lib/features/auth/authSlice"
 import CalendarView from "../components/Calendar";
 import BookingModal from "../components/BookingModal";
 import AuthForm from "../components/AuthForm";
-import { fetchEvents,handleSubmit } from "../services/apiService";
+import { fetchEvents, handleSubmit } from "../services/apiService";
 import { mapEventData } from "../utils/eventMapper";
 
 export default function Home() {
@@ -49,32 +49,23 @@ export default function Home() {
 
   return (
     <div className="container mx-auto mt-8">
-      {isModalOpen && (
-        <BookingModal
-          onClose={handleModalClose}
-          onSubmit={async(formData)=>{await handleSubmit(formData, token)}}
-          slot={selectedSlot}
-        />
-      )}
-
-      <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-        Conference Room Booking
-      </h1>
-      {!isModalOpen && user ? (
-        <div className="relative z-50">
-          <button
-            onClick={handleLogout}
-            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors mb-4"
-          >
-            Logout
-          </button>
-          {error && <div className="text-red-500 mb-4">Error: {error}</div>}
-          <div className="bg-gray-100 rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-semibold text-gray-700 mb-4">Your Calendar</h2>
-            <CalendarView events={events} onSelectSlot={handleSelectSlot} />
-          </div>
+    <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+      Conference Room Booking
+    </h1>
+    <div className="relative">
+      {error && <div className="text-red-500 mb-4">Error: {error}</div>}
+      <div className={`${!user ? "blur-sm" : ""} bg-gray-100 rounded-lg shadow-lg p-6`}>
+        <h2 className="text-xl font-semibold text-gray-700 mb-4">Your Calendar</h2>
+        <CalendarView events={events} onSelectSlot={handleSelectSlot} />
+      </div>
+      {!user && (
+        <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-50">
+          <h1 className="text-xl font-semibold text-gray-700">Please Login</h1>
         </div>
-      ) : (<h1>Please Login</h1>)}
+      )}
     </div>
+  </div>
+  
+
   );
 }
