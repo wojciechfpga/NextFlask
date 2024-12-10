@@ -24,7 +24,7 @@ const Login = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-50">
+    <div className="relative z-50">
       <AuthForm
         type="Login"
         formData={loginForm}
