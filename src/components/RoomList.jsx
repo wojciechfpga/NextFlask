@@ -1,4 +1,5 @@
 'use client'
+
 import { useQuery } from 'react-query';
 import { fetchRooms } from 'src/services/apiService';
 

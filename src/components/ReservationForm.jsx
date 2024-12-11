@@ -1,19 +1,15 @@
 'use client';
+
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { sendReservation } from "src/services/apiService";
 import { useSelector } from "react-redux";
-import axios from "axios";
-
-// Funkcja do pobrania pokoi
-export const fetchRooms = async () => {
-  const { data } = await axios.get('http://localhost:5000/api/rooms');
-  return data;
-};
+import { fetchRooms } from 'src/services/apiService';
+import { useQuery } from "react-query";
 
 const formatDateForInput = (date) => {
   if (!date) return "";
-  return new Date(date).toISOString().slice(0, 16); // Dostosowanie do formatu bez sekund
+  return new Date(date).toISOString().slice(0, 16);
 };
 
 const ReservationForm = ({ slot = [] }) => {
@@ -26,17 +22,15 @@ const ReservationForm = ({ slot = [] }) => {
     },
   });
 
-  // Stan do przechowywania pokoi
+  const { data, error, isLoading } = useQuery('rooms', fetchRooms);
   const [rooms, setRooms] = useState([]);
 
-  // Funkcja do pobrania pokoi i ustawienia ich w stanie
   useEffect(() => {
-    const loadRooms = async () => {
-      const roomsData = await fetchRooms();
-      setRooms(roomsData);
-    };
-    loadRooms();
-  }, []);
+    if (data) { 
+      setRooms(data); 
+    }
+  }, [data]);
+  
 
   const handleFormSubmit = (data) => {
     const convertedData = {
