@@ -1,4 +1,3 @@
-
 export const mapEventData = (data) => ({
     id: data.id,
     title: `Room ${data.room_name}`,
@@ -6,6 +5,3 @@ export const mapEventData = (data) => ({
     end: new Date(data.end_time),
     room_id:data.room_id,
   });
-  
-
-  
