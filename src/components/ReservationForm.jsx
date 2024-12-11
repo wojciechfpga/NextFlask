@@ -8,6 +8,8 @@ import  useReservationForm from "../hooks/reservationForm/useReservationForm"
 import ReservationFormDateTimeInput from "./ReservationFormsSubComponets/ReservationFormDateTimeInput"
 import ReservationFormLoadingOverlay from "./ReservationFormsSubComponets/ReservationFormLoadingOverlay"
 import ReservationFormSelector from "./ReservationFormsSubComponets/ReservationFormSelector"
+import ReservationFormHeader from "./ReservationFormsSubComponets/ReservationFormHeader"
+import ReservationFormButton from "./ReservationFormsSubComponets/ReservationFormButton"
 const formatDateForInput = (date) => {
   if (!date) return "";
   return new Date(date).toISOString().slice(0, 16);
@@ -47,18 +49,13 @@ const ReservationForm = ({ slot = [] }) => {
     <div className="relative">
       {(isLoading || error) && <ReservationFormLoadingOverlay isLoading={isLoading} error={error} />}
       <div className={`bg-white rounded-lg shadow-lg p-6 max-w-md w-full ${isLoading || error ? 'opacity-50' : ''}`}>
-        <h2 className="text-xl font-bold text-gray-700 mb-4">Book Room</h2>
+        <ReservationFormHeader/>
         <form onSubmit={handleSubmit(handleFormSubmit)}>
           <ReservationFormSelector rooms={rooms} register={register} />
           <ReservationFormDateTimeInput label="Start Time" name="start_time" register={register} />
           <ReservationFormDateTimeInput label="End Time" name="end_time" register={register} />
           <div className="flex justify-end">
-            <button
-              type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-            >
-              Submit
-            </button>
+            <ReservationFormButton/>
           </div>
         </form>
       </div>
