@@ -1,34 +1,36 @@
 'use client';
 
-import { useState} from "react";
 import { useSelector } from "react-redux";
-import CalendarView from "./Calendar";
 import ReservationForm from "./ReservationForm";
 import ModalReservation from "./ModalReservation";
-import HomeLoginPlease from "./HomeCalendarSubComponets/HomeCalendarPleaseForLogin"
-import HomeCalendarLoading from "./HomeCalendarSubComponets/HomeCalendarLoading"
-import HomeCalendarInternalHeader from "./HomeCalendarSubComponets/HomeCalendarInternalHeader"
-import HomeCalendarExternalHeader from "./HomeCalendarSubComponets/HomeCalendarExternalHeader"
-import { useFetchEvents } from "../utils/eventMapper";
-import { handleEventDrop,updateEvents} from "../utils/eventHandler";
+import HomeCalendarExternalHeader from "./HomeCalendarSubComponets/HomeCalendarExternalHeader";
+import HomeCalendarContent from "./HomeCalendarSubComponets/HomeCalendarContent";
+import { handleEventDrop, updateEvents, renderContent } from "../utils/eventHandler";
+import  useHomeCalendarState  from "../hooks/calendar/useHomeCalendarState";
+
 export default function HomeCalendar() {
   const { user, token, error } = useSelector((state) => state.auth);
-  const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [slotFromCalendar, setSlotFromCalendar] = useState(new Date());
-  const [reservationModal, setReservationModal] = useState(false);
 
-  useFetchEvents(token, setEvents, setLoading);
+  const {
+    events,
+    loading,
+    slotFromCalendar,
+    reservationModal,
+    setSlotFromCalendar,
+    setReservationModal,
+    setEvents,
+  } = useHomeCalendarState(token);
 
   const onSelectSlot = (slot) => {
     setReservationModal(true);
     setSlotFromCalendar(slot);
   };
-  const onEventDrop = ({ event, start, end }) => 
+
+  const onEventDrop = ({ event, start, end }) =>
     handleEventDrop(token, event, start, end, (updatedData) => {
-      setEvents(prevItems => updateEvents(prevItems, updatedData));
+      setEvents((prevItems) => updateEvents(prevItems, updatedData));
     });
-  
+
   return (
     <div className="container mx-auto mt-8">
       {user && reservationModal && (
@@ -36,21 +38,17 @@ export default function HomeCalendar() {
           <ReservationForm slot={slotFromCalendar} />
         </ModalReservation>
       )}
-      <HomeCalendarExternalHeader/>
+      <HomeCalendarExternalHeader />
       <div className="relative">
-        {error && <div className="text-red-500 mb-4">Error: {error}</div>}
-        <div
-          className={`${!user ? "blur-sm" : ""} bg-gray-100 rounded-lg shadow-lg p-6`}
-        >
-          <HomeCalendarInternalHeader/>
-          <CalendarView
+        {renderContent(user, error, loading)}
+        {user && (
+          <HomeCalendarContent
+            user={user}
             events={events}
-            onEventDrop={onEventDrop}
-            onSelectSlot={onSelectSlot}
+            handleEventDrop={onEventDrop}
+            handleSelectSlot={onSelectSlot}
           />
-        </div>
-        {!user && ( <HomeLoginPlease/>)}
-        {user && loading && ( <HomeCalendarLoading/> )}
+        )}
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 const localizer = momentLocalizer(moment);
 const DnDCalendar = withDragAndDrop(Calendar);
 
-const CalendarView = ({ events, onEventDrop, onSelectSlot, onSelectEvent }) => {
+const HomeCalendarOnlyView = ({ events, onEventDrop, onSelectSlot, onSelectEvent }) => {
   
   const [view, setView] = useState("week");
 
@@ -33,4 +33,4 @@ const CalendarView = ({ events, onEventDrop, onSelectSlot, onSelectEvent }) => {
   );
 };
 
-export default CalendarView;
+export default HomeCalendarOnlyView;

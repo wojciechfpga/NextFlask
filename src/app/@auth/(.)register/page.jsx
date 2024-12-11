@@ -1,7 +1,7 @@
 import Modal from "../../../components/Modal"
 import Register from "../../../components/Register"
 
-const Page = () =>{
+const RegisterView = () =>{
 
     return (
         <Modal>
@@ -10,4 +10,4 @@ const Page = () =>{
     )
 }
 
-export default Page
+export default RegisterView

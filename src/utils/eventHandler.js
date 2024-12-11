@@ -1,5 +1,7 @@
 import { updateEvent } from "src/services/apiService";
 import { mapEventData } from "./eventMapper";
+import HomeLoginPlease from "../components/HomeCalendarSubComponets/HomeCalendarPleaseForLogin"
+import HomeCalendarLoading from"../components/HomeCalendarSubComponets/HomeCalendarLoading"
 export const updateEvents = (events, newValue) =>
     events.map(item => (item.id === newValue.id ? { ...newValue } : item));
   
@@ -19,4 +21,12 @@ export const updateEvents = (events, newValue) =>
       console.error("Failed to update event", error);
     }
   };
+
+  export const renderContent = (user, error, loading) => {
+    if (!user) return <HomeLoginPlease />;
+    if (loading) return <HomeCalendarLoading />;
+    if (error) return <div className="text-red-500 mb-4">Error: {error}</div>;
+    return null;
+  };
+  
   
