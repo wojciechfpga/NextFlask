@@ -31,7 +31,6 @@ const ReservationForm = ({ slot = [] }) => {
     }
   }, [data]);
   
-
   const handleFormSubmit = (data) => {
     const convertedData = {
       ...data,
@@ -52,54 +51,64 @@ const ReservationForm = ({ slot = [] }) => {
   }, [slot]);
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
-      <h2 className="text-xl font-bold text-gray-700 mb-4">Book Room</h2>
-      <form onSubmit={handleSubmit(handleFormSubmit)}>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">
-            Room ID
-          </label>
-          <select
-            className="w-full px-4 py-2 border rounded-lg"
-            {...register("room_id", { required: true })}
-          >
-            <option value="">Select a Room</option>
-            {rooms.map((room) => (
-              <option key={room.id} value={room.id}>
-                {room.name}
-              </option>
-            ))}
-          </select>
+    <div className="relative">
+      {/* Zaciemnienie i komunikaty */}
+      {(isLoading || error) && (
+        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
+          {isLoading && <p className="text-white text-lg font-bold">Loading...</p>}
+          {error && <p className="text-red-500 text-lg font-bold">Some Error</p>}
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">
-            Start Time
-          </label>
-          <input
-            type="datetime-local"
-            className="w-full px-4 py-2 border rounded-lg"
-            {...register("start_time", { required: true })}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">
-            End Time
-          </label>
-          <input
-            type="datetime-local"
-            className="w-full px-4 py-2 border rounded-lg"
-            {...register("end_time", { required: true })}
-          />
-        </div>
-        <div className="flex justify-end">
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
+      )}
+      
+      <div className={`bg-white rounded-lg shadow-lg p-6 max-w-md w-full ${isLoading || error ? 'opacity-50' : ''}`}>
+        <h2 className="text-xl font-bold text-gray-700 mb-4">Book Room</h2>
+        <form onSubmit={handleSubmit(handleFormSubmit)}>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-medium mb-2">
+              Room ID
+            </label>
+            <select
+              className="w-full px-4 py-2 border rounded-lg"
+              {...register("room_id", { required: true })}
+            >
+              <option value="">Select a Room</option>
+              {rooms.map((room) => (
+                <option key={room.id} value={room.id}>
+                  {room.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-medium mb-2">
+              Start Time
+            </label>
+            <input
+              type="datetime-local"
+              className="w-full px-4 py-2 border rounded-lg"
+              {...register("start_time", { required: true })}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-medium mb-2">
+              End Time
+            </label>
+            <input
+              type="datetime-local"
+              className="w-full px-4 py-2 border rounded-lg"
+              {...register("end_time", { required: true })}
+            />
+          </div>
+          <div className="flex justify-end">
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
