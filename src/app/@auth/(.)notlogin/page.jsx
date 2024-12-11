@@ -1,7 +1,7 @@
 'use client'
 
 import AuthButtons from "../../../components/Auth/AuthButtons";
-import ClearAuthButton from "../../../components/Auth/ClearAuthButton";
+import AuthClearButton from "../../../components/Auth/AuthClearButton";
 import { useSelector } from "react-redux";
 import { useRouter } from 'next/navigation';
 import { useEffect } from "react";
@@ -15,7 +15,7 @@ const NoView = () => {
         <div>
             <nav>
                 {user ? (
-                    <ClearAuthButton />
+                    <AuthClearButton />
                 ) : (
                     <AuthButtons />
                 )}

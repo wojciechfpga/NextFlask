@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../lib/features/auth/authSlice";
 
-const ClearAuthButton = () => {
+const AuthClearButton = () => {
     const router = useRouter();
     const { user } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
@@ -31,4 +31,4 @@ const ClearAuthButton = () => {
     );
 }
 
-export default ClearAuthButton;
+export default AuthClearButton;
