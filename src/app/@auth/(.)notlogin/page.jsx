@@ -9,9 +9,9 @@ import { usePathname } from "next/navigation";
 const NoView = () => {
     const { user } = useSelector((state) => state.auth);
     const router = useRouter()
-    const currentUrl = usePathname();
+    const loginUrl = useSelector((state) => state.auth.loginUrl);
     useEffect(() => {
-        router.push(currentUrl)
+        router.push(loginUrl)
     }, [router])
     return (
         <div>

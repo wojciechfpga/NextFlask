@@ -19,11 +19,15 @@ const authSlice = createSlice({
     token: null,
     status: 'idle',
     error: null,
+    loginUrl: "/",
   },
   reducers: {
     logout: (state) => {
       state.user = null;
       state.token = null;
+    },
+    changeLoginUrl: (state, action) => {
+      state.loginUrl = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -44,6 +48,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, changeLoginUrl } = authSlice.actions;
 
 export default authSlice.reducer;
