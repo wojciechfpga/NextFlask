@@ -57,7 +57,7 @@ export const sendReservation = async (formData, token) => {
   }
 };
 
-export const fetchRooms = async () => {
+export const apiGetRetriveRooms = async () => {
   try {
     const { data } = await axios.get("http://localhost:5000/api/rooms");
     return data;
@@ -66,7 +66,7 @@ export const fetchRooms = async () => {
   }
 };
 
-export const updateEvent = async (token, event) => {
+export const apiPatchUpdateReservation = async (token, event) => {
   try {
     const response = await axios.patch(
       `http://localhost:5000/api/reservations/${event.id}`,

@@ -1,7 +1,7 @@
-import { updateEvent } from "src/services/apiService";
+import { apiPatchUpdateReservation } from "src/services/apiService";
 import { mapEventData } from "../mappers/eventMappers";
 
-export const updateEvents = (events, newValue) =>
+export const handleEventUpdate = (events, newValue) =>
   events.map(item => (item.id === newValue.id ? { ...newValue } : item));
 
 export const handleEventDrop = async (token, event, start, end, updateEventsCallback) => {
@@ -13,7 +13,7 @@ export const handleEventDrop = async (token, event, start, end, updateEventsCall
   };
 
   try {
-    const response = await updateEvent(token, updatedEvent);
+    const response = await apiPatchUpdateReservation(token, updatedEvent);
     const updatedData = mapEventData(response);
     updateEventsCallback(updatedData);
   } catch (error) {

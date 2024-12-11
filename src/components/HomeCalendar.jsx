@@ -5,7 +5,7 @@ import ReservationForm from "./ReservationForm";
 import ReservationFormModal from "./ReservationFormsSubComponets/ReservationFormModal";
 import HomeCalendarExternalHeader from "./HomeCalendarSubComponets/HomeCalendarExternalHeader";
 import HomeCalendarContent from "./HomeCalendarSubComponets/HomeCalendarContent";
-import { handleEventDrop, updateEvents } from "../utils/handlers/eventHandlers";
+import { handleEventDrop, handleEventUpdate } from "../utils/handlers/eventHandlers";
 import {HomeCalendarRenderContent} from "./HomeCalendarSubComponets/HomeCalendarRenderContent";
 import  useHomeCalendarState  from "../hooks/calendar/useHomeCalendarState";
 
@@ -29,7 +29,7 @@ export default function HomeCalendar() {
 
   const onEventDrop = ({ event, start, end }) =>
     handleEventDrop(token, event, start, end, (updatedData) => {
-      setEvents((prevItems) => updateEvents(prevItems, updatedData));
+      setEvents((prevItems) => handleEventUpdate(prevItems, updatedData));
     });
 
   return (
