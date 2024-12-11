@@ -1,15 +1,16 @@
 import axios from "axios";
 
-// Function to fetch events for authenticated user
 export const fetchEvents = async (token) => {
-  const response = await fetch("http://localhost:5000/api/reservations/my", {
-    headers: { Authorization: `${token}` },
-  });
-  if (!response.ok) throw new Error("Network response was not ok");
-  return response.json();
+  try {
+    const response = await axios.get("http://localhost:5000/api/reservations/my", {
+      headers: { Authorization: `${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error("Network response was not ok");
+  }
 };
 
-// Function to create a reservation
 export const createReservation = async (formData, token) => {
   try {
     const response = await axios.post(
@@ -27,53 +28,58 @@ export const createReservation = async (formData, token) => {
     throw new Error("Error creating reservation");
   }
 };
-export const handleSubmit = async(formData,token) => {
-    await axios.post("http://localhost:5000/api/reservations",formData, {
-    headers: {
-      'Content-Type': 'application/json', 
-      Authorization: token, 
-    },
-  }).then((data)=>{
-    alert("Reservation created")
 
-  }).catch(()=>{    
-    alert("Some error")   
-  })}
+export const handleSubmit = async (formData, token) => {
+  try {
+    await axios.post("http://localhost:5000/api/reservations", formData, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    alert("Reservation created");
+  } catch {
+    alert("Some error");
+  }
+};
 
-  export const sendReservation = async(formData,token) => {
-    await axios.post("http://localhost:5000/api/reservations",formData, {
-    headers: {
-      'Content-Type': 'application/json', 
-      Authorization: token, 
-    },
-  }).then((data)=>{
-    alert("Reservation created")
-
-  }).catch(()=>{    
-    alert("Some error")   
-  })}
-
-
+export const sendReservation = async (formData, token) => {
+  try {
+    await axios.post("http://localhost:5000/api/reservations", formData, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    alert("Reservation created");
+  } catch {
+    alert("Some error");
+  }
+};
 
 export const fetchRooms = async () => {
-  const { data } = await axios.get('http://localhost:5000/api/rooms');
-  return data;
+  try {
+    const { data } = await axios.get("http://localhost:5000/api/rooms");
+    return data;
+  } catch (error) {
+    throw new Error("Failed to fetch rooms");
+  }
 };
 
 export const updateEvent = async (token, event) => {
-  const response = await fetch(`http://localhost:5000/api/reservations/${event.id}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `${token}`,
-    },
-    body: JSON.stringify(event),
-  });
-
-  if (!response.ok) {
+  try {
+    const response = await axios.patch(
+      `http://localhost:5000/api/reservations/${event.id}`,
+      event,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
     throw new Error("Failed to update event");
   }
-
-  return response.json();
 };
-
