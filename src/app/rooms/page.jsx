@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from 'react';
-import RoomList from '../../components/RoomList';
-import RoomSearchHeader from '../../components/RoomSearchHeader';
-import RoomFilterInput from '../../components/RoomFilterInput';
+import RoomList from '../../components/Room/RoomList';
+import RoomSearchHeader from '../../components/Room/RoomSearchHeader';
+import RoomFilterInput from '../../components/Room/RoomFilterInput';
 const Rooms = () => {
   const [filter, setFilter] = useState('');
 
