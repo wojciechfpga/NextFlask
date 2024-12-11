@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import HeaderLayout from '../components/Header'
-import ReduxProvider from '../components/Wrap';
-import ReacQueryProvider from '../components/QueryProvide';
+import ReduxProvider from '../providers/ReduxProvider';
+import ReacQueryProvider from '../providers/QueryProvider';
 import Footer from '../components/Footer';
 
 const geistSans = localFont({
