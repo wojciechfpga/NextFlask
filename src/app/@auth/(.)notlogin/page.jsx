@@ -1,7 +1,7 @@
 'use client'
 
-import AuthButtons from "../../../components/AuthButtons";
-import ClearAuthButton from "../../../components/ClearAuthButton";
+import AuthButtons from "../../../components/Auth/AuthButtons";
+import ClearAuthButton from "../../../components/Auth/ClearAuthButton";
 import { useSelector } from "react-redux";
 import { useRouter } from 'next/navigation';
 import { useEffect } from "react";

@@ -1,12 +1,12 @@
-import Modal from "../../../components/Modal"
+import AuthModal from "../../../components/Auth/AuthModal"
 import Login from "../../../components/Login"
 
 const LoginView = () =>{
 
     return (
-        <Modal>
+        <AuthModal>
             <Login />
-        </Modal>
+        </AuthModal>
     )
 }
 

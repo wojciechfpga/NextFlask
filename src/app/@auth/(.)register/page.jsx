@@ -1,12 +1,12 @@
-import Modal from "../../../components/Modal"
+import AuthModal from "../../../components/Auth/AuthModal"
 import Register from "../../../components/Register"
 
 const RegisterView = () =>{
 
     return (
-        <Modal>
+        <AuthModal>
             <Register />
-        </Modal>
+        </AuthModal>
     )
 }
 

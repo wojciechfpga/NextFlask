@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../lib/features/auth/authSlice";
+import { logout } from "../../lib/features/auth/authSlice";
 
 const ClearAuthButton = () => {
     const router = useRouter();
