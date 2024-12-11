@@ -2,7 +2,7 @@
 
 import { useSelector } from "react-redux";
 import ReservationForm from "./ReservationForm";
-import ModalReservation from "./ModalReservation";
+import ReservationModal from "./HomeCalendarSubComponets/ReservationModal";
 import HomeCalendarExternalHeader from "./HomeCalendarSubComponets/HomeCalendarExternalHeader";
 import HomeCalendarContent from "./HomeCalendarSubComponets/HomeCalendarContent";
 import { handleEventDrop, updateEvents, renderContent } from "../utils/eventHandler";
@@ -34,9 +34,9 @@ export default function HomeCalendar() {
   return (
     <div className="container mx-auto mt-8">
       {user && reservationModal && (
-        <ModalReservation setModal={setReservationModal}>
+        <ReservationModal setModal={setReservationModal}>
           <ReservationForm slot={slotFromCalendar} />
-        </ModalReservation>
+        </ReservationModal>
       )}
       <HomeCalendarExternalHeader />
       <div className="relative">
