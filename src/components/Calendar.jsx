@@ -11,6 +11,7 @@ const localizer = momentLocalizer(moment);
 const DnDCalendar = withDragAndDrop(Calendar);
 
 const CalendarView = ({ events, onEventDrop, onSelectSlot, onSelectEvent }) => {
+  
   const [view, setView] = useState("week");
 
   return (

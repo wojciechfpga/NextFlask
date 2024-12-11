@@ -1,7 +1,7 @@
 import Modal from "../../../components/Modal"
 import Login from "../../../components/Login"
 
-const Page = () =>{
+const LoginView = () =>{
 
     return (
         <Modal>
@@ -10,4 +10,4 @@ const Page = () =>{
     )
 }
 
-export default Page
+export default LoginView

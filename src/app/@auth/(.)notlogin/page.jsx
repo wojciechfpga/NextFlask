@@ -1,42 +1,39 @@
 'use client'
-import Link from "next/link"
-import { useEffect } from "react"
+
+import { useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser, registerUser, logout } from "../../../lib/features/auth/authSlice";
-export default function NoView() {
-    const router = useRouter()
-    const { user, token, error } = useSelector((state) => state.auth);
-    const dispatch=useDispatch()
+import { logout } from "../../../lib/features/auth/authSlice";
+import AuthButtons from "../../../components/AuthButtons";
+
+const NoView = () => {
+    const router = useRouter();
+    const { user } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
     const handleLogout = () => dispatch(logout());
+
     useEffect(() => {
-        router.push("/")
-    }, [router])
+        router.push("/");
+    }, [router]);
 
-    return (<div><nav>
-        {user ? (
-            <div className="relative z-50">
-                <button
-                    onClick={handleLogout}
-                    className="bg-gray-800 text-white py-2 px-6 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 m-4"
-                >
-                    Logout
-                </button>
-            </div>
-        ) : (
-            <div className="flex space-x-4">
-            <Link href="/login">
-                <button className="bg-gray-800 text-white py-2 px-6 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600">
-                    Login
-                </button>
-            </Link>
-            <Link href="/register">
-                <button className="bg-gray-800 text-white py-2 px-6 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600">
-                    Register
-                </button>
-            </Link>
+    return (
+        <div>
+            <nav>
+                {user ? (
+                    <div className="relative z-50">
+                        <button
+                            onClick={handleLogout}
+                            className="bg-gray-800 text-white py-2 px-6 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 m-4"
+                        >
+                            Logout
+                        </button>
+                    </div>
+                ) : (
+                    <AuthButtons />
+                )}
+            </nav>
         </div>
-        )}
-
-    </nav></div>)
+    );
 }
+
+export default NoView;
