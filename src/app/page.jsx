@@ -68,6 +68,7 @@ export default function Home() {
 
     try {
       const response = await updateEvent(token, updatedEvent);
+      console.log("Handle")
       console.log(response)
       const updatedData = mapEventData(response);
       console.log(updatedData)

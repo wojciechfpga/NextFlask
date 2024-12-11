@@ -1,4 +1,3 @@
-// Function to map event data for calendar
 export const mapEventData = (data) => ({
     id: data.id,
     title: `Room ${data.room_name}`,
