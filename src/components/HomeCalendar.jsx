@@ -6,7 +6,7 @@ import ReservationFormModal from "./ReservationFormsSubComponets/ReservationForm
 import HomeCalendarExternalHeader from "./HomeCalendarSubComponets/HomeCalendarExternalHeader";
 import HomeCalendarContent from "./HomeCalendarSubComponets/HomeCalendarContent";
 import { handleEventDrop, updateEvents } from "../utils/handlers/eventHandlers";
-import {renderContent} from "../utils/components/renderContent";
+import {HomeCalendarRenderContent} from "./HomeCalendarSubComponets/HomeCalendarRenderContent";
 import  useHomeCalendarState  from "../hooks/calendar/useHomeCalendarState";
 
 export default function HomeCalendar() {
@@ -41,7 +41,7 @@ export default function HomeCalendar() {
       )}
       <HomeCalendarExternalHeader />
       <div className="relative">
-        {renderContent(user, error, loading)}
+        {HomeCalendarRenderContent(user, error, loading)}
         {user && (
           <HomeCalendarContent
             user={user}

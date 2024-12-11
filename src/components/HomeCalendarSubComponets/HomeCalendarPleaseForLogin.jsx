@@ -1,4 +1,4 @@
-const HomeLoginPlease = () => {
+const HomeCalendarPleaseForLogin = () => {
 
     return (
         <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-70">
@@ -7,4 +7,4 @@ const HomeLoginPlease = () => {
     )
 }
 
-export default HomeLoginPlease
+export default HomeCalendarPleaseForLogin
