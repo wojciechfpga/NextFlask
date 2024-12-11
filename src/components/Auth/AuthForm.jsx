@@ -1,3 +1,6 @@
+import AuthFormTextInput from "./AuthFormTextInput";
+import AuthFormHeader from "./AuthFormHeader"
+import AuthFormButton from "./AuthFormButton"
 const AuthForm = ({ type, formData, setFormData, onSubmit }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -6,39 +9,31 @@ const AuthForm = ({ type, formData, setFormData, onSubmit }) => {
 
   return (
     <div className="bg-white shadow-md p-6">
-      <h2 className="text-xl font-bold text-black mb-4">{type}</h2>
-      <input
+      <AuthFormHeader type={type} />
+      <AuthFormTextInput
         type="text"
         name="username"
         placeholder="Username"
-        className="w-full px-2 py-1 mb-4 border-b border-gray-400 text-black focus:border-gray-600 focus:outline-none bg-transparent"
         value={formData.username}
         onChange={handleChange}
       />
-      <input
+      <AuthFormTextInput
         type="password"
         name="password"
         placeholder="Password"
-        className="w-full px-2 py-1 mb-4 border-b border-gray-400 text-black focus:border-gray-600 focus:outline-none bg-transparent"
         value={formData.password}
         onChange={handleChange}
       />
       {type === "Register" && (
-        <input
+        <AuthFormTextInput
           type="password"
           name="repeatPassword"
           placeholder="Repeat Password"
-          className="w-full px-2 py-1 mb-4 border-b border-gray-400 text-black focus:border-gray-600 focus:outline-none bg-transparent"
           value={formData.repeatPassword || ""}
           onChange={handleChange}
         />
       )}
-      <button
-        onClick={onSubmit}
-        className="w-full px-4 py-2 text-white bg-gray-800 hover:bg-gray-500 transition-colors"
-      >
-        {type}
-      </button>
+      <AuthFormButton onSubmit={onSubmit} type={type}/>
     </div>
   );
 };
