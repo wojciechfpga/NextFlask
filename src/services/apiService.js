@@ -80,6 +80,6 @@ export const updateEvent = async (token, event) => {
     );
     return response.data;
   } catch (error) {
-    throw new Error("Failed to update event");
+    throw new Error(error);
   }
 };

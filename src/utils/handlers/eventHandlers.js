@@ -18,5 +18,6 @@ export const handleEventDrop = async (token, event, start, end, updateEventsCall
     updateEventsCallback(updatedData);
   } catch (error) {
     console.error("Failed to update event", error);
+    alert(`Failed to update event:maybe already reserved at this time`);
   }
 };

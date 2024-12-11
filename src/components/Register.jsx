@@ -15,7 +15,7 @@ const Register = () => {
     repeatPassword: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
-  const { token, error } = useSelector((state) => state.auth);
+  const { error } = useSelector((state) => state.auth);
 
   const handleRegister = () => {
     const { password, repeatPassword } = registerForm;

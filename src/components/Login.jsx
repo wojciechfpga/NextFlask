@@ -20,7 +20,6 @@ const Login = () => {
 
   const handleLogin = () => {
     dispatch(loginUser(loginForm));
-    console.log("LOGIN");
   };
 
   return (
