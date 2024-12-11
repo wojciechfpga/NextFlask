@@ -1,5 +1,5 @@
-import HomeCalendarPleaseForLogin from "../../components/HomeCalendarSubComponets/HomeCalendarPleaseForLogin";
-import HomeCalendarLoading from "../../components/HomeCalendarSubComponets/HomeCalendarLoading";
+import HomeCalendarPleaseForLogin from "./HomeCalendarPleaseForLogin";
+import HomeCalendarLoading from "./HomeCalendarLoading";
 
 export const HomeCalendarRenderContent = (user, error, loading) => {
   if (!user) return <HomeCalendarPleaseForLogin />;
