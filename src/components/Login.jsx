@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import { loginUser} from "src/lib/features/auth/authSlice";
+import {INTERNAL_ROUTES} from "../config/internalRoutes"
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const Login = () => {
 
   useEffect(() => {
     if (token) {
-      router.push('/notlogin'); 
+      router.push(INTERNAL_ROUTES.NOT_LOGGED); 
     }
   }, [token]);
 
