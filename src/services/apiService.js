@@ -43,7 +43,7 @@ export const handleSubmit = async (formData, token) => {
   }
 };
 
-export const sendReservation = async (formData, token) => {
+export const apiPostSendReservation = async (formData, token) => {
   try {
     await axios.post("http://localhost:5000/api/reservations", formData, {
       headers: {

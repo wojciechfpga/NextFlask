@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { sendReservation } from "src/services/apiService";
+import { apiPostSendReservation } from "src/services/apiService";
 import { useSelector } from "react-redux";
 import  useReservationForm from "../hooks/reservationForm/useReservationForm"
 import ReservationFormDateTimeInput from "./ReservationFormsSubComponets/ReservationFormDateTimeInput"
@@ -41,7 +41,7 @@ const ReservationForm = ({ slot = [] }) => {
       end_time: data.end_time.slice(0, 16),
     };
 
-    sendReservation(convertedData, token);
+    apiPostSendReservation(convertedData, token);
     reset();
   };
 
