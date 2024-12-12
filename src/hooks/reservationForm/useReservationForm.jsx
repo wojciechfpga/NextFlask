@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
-import { apiGetRetriveRooms  } from "src/services/apiService";
+import { apiGetRetrieveRooms } from "../../services/apiService";
 
 const useReservationForm = () => {
-  const { data, error, isLoading } = useQuery("rooms", apiGetRetriveRooms );
+  const { data, error, isLoading } = useQuery("rooms", apiGetRetrieveRooms );
   const [rooms, setRooms] = useState([]);
 
   useEffect(() => {

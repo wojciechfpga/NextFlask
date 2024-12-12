@@ -1,10 +1,10 @@
 'use client'
 
 import { useQuery } from 'react-query';
-import { apiGetRetriveRooms  } from 'src/services/apiService';
+import { apiGetRetrieveRooms  } from 'src/services/apiService';
 
 const RoomList = ({ filter }) => {
-  const { data, error, isLoading } = useQuery('rooms', apiGetRetriveRooms );
+  const { data, error, isLoading } = useQuery('rooms', apiGetRetrieveRooms );
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading rooms data</div>;
