@@ -4,7 +4,7 @@ import AuthForm from "src/components/Auth/AuthForm";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
-import { loginUser, registerUser, logout } from "src/lib/features/auth/authSlice";
+import { loginUser} from "src/lib/features/auth/authSlice";
 
 const Login = () => {
   const dispatch = useDispatch();

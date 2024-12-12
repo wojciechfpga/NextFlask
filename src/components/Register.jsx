@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import { registerUser } from "src/lib/features/auth/authSlice";
-
+import {INTERNAL_ROUTES} from "../config/internalRoutes"
+import {ERROR_MESSAGES} from "../config/errorMessages"
 const Register = () => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -21,14 +22,13 @@ const Register = () => {
     const { password, repeatPassword } = registerForm;
 
     if (password !== repeatPassword) {
-      setErrorMessage("Passwords do not match.");
+      setErrorMessage(ERROR_MESSAGES.REGISTER_COMPONET_PASSWORD_MATCH_ERROR);
       return;
     }
 
     setErrorMessage("");
     dispatch(registerUser(registerForm));
-    console.log("Register");
-    router.push('/login'); 
+    router.push(INTERNAL_ROUTES.LOGIN); 
   };
 
   return (
