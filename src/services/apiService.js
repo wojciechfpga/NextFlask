@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const fetchEvents = async (token) => {
+export const apiGetRetriveMyReservations = async (token) => {
   try {
     const response = await axios.get("http://localhost:5000/api/reservations/my", {
       headers: { Authorization: `${token}` },
@@ -11,37 +11,6 @@ export const fetchEvents = async (token) => {
   }
 };
 
-export const createReservation = async (formData, token) => {
-  try {
-    const response = await axios.post(
-      "http://localhost:5000/api/reservations",
-      formData,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    throw new Error("Error creating reservation");
-  }
-};
-
-export const handleSubmit = async (formData, token) => {
-  try {
-    await axios.post("http://localhost:5000/api/reservations", formData, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-    });
-    alert("Reservation created");
-  } catch {
-    alert("Some error");
-  }
-};
 
 export const apiPostSendReservation = async (formData, token) => {
   try {

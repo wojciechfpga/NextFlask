@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { fetchEvents } from "../../../services/apiService";
+import { apiGetRetriveMyReservations } from "../../../services/apiService";
 import { mapEventData } from "../../../utils/mappers/eventMappers";
 const useHomeCalendarStateFetchEvents = (token, setEvents, setLoading) => {
 
@@ -11,7 +11,7 @@ const useHomeCalendarStateFetchEvents = (token, setEvents, setLoading) => {
   
       const fetchAndSetEvents = async () => {
         try {
-          const data = await fetchEvents(token);
+          const data = await apiGetRetriveMyReservations(token);
           const convertedData = data.map(mapEventData);
           setEvents(convertedData);
         } catch (err) {
